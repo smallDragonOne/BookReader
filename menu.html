@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    </head>
+    
+    <body>
+        <div style="margin-bottom: 10px;"><input type="text" id="searchId" style="width: 160px;" placeholder="关键字搜索.."/> </div>
+        <div id="containerId">
+
+        </div>
+        
+        <script src="./bookdata.js"></script>
+        <script>
+            //alert()
+            $(function(){
+                var treeData = globelTreeData;
+
+            $("#containerId").on('changed.jstree',function(e,data){
+
+                /*
+                *    //选中节点的id  
+    console.log(data.instance.get_selected(true)[0].id);  
+    //选中节点的text  
+    console.log(data.instance.get_selected(true)[0].text);  
+    console.log(data.instance.get_node(data.selected[0]).id);  
+    console.log(data.instance.get_node(data.selected[0]).text); 
+                */
+
+                var filePath = data.instance.get_node(data.selected[0]).id;
+                if (filePath){
+                    window.open(filePath,'showFrame');
+                }
+                
+            }).jstree({ 
+                'plugins':["search"],
+                'core' : {
+                'data' : treeData
+                } });
+            })
+
+
+            var to = false;
+            $("#searchId").keyup(function(){
+
+                if (to){
+                    clearTimeout(to);
+                }
+                to = setTimeout(() => {
+                    var v= $("#searchId").val();
+                    $("#containerId").jstree(true).search(v);
+                }, (250));
+            })
+        </script>
+    </body>
+</html>
