@@ -1,3 +1,4 @@
+<!DOCTYPE>
 <html>
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
@@ -37,9 +38,8 @@
     console.log(data.instance.get_node(data.selected[0]).id);  
     console.log(data.instance.get_node(data.selected[0]).text); 
                 */
-
                 var filePath = data.instance.get_node(data.selected[0]).id;
-                if (filePath){
+                if (filePath && (filePath.indexOf(".pdf") > 0 || filePath.indexOf(".txt") > 0)){
                     window.open(filePath,'showFrame');
                 }
                 
