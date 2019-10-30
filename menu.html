@@ -17,6 +17,16 @@
             $(function(){
                 var treeData = globelTreeData;
 
+                for (let index = 0; index < treeData.length; index++) {
+                    const element = treeData[index]; 
+                    if (element.id.indexOf(".pdf") > 0){
+                        element.icon = "./images/pdfformt.png"
+                    }
+                    else if (element.id.indexOf(".txt") > 0){
+                        element.icon = "./images/textfile.png"
+                    }
+                }
+
             $("#containerId").on('changed.jstree',function(e,data){
 
                 /*
@@ -34,7 +44,7 @@
                 }
                 
             }).jstree({ 
-                'plugins':["search"],
+                'plugins':["search","types"],
                 'core' : {
                 'data' : treeData
                 } });
